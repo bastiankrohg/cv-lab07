@@ -44,8 +44,8 @@ def run_mosaic_lab():
     # TODO 1: Experiment with blob and corner feature detectors.
     # TODO 3: Experiment with feature matching
     # Set up objects for detection, description and matching.
-    detector = cv2.ORB_create(nfeatures=1000) # quite fast, good matches
-    #detector = cv2.SIFT_create(nfeatures=1000) # quite fast, good matches
+    detector = cv2.ORB_create(nfeatures=1000) # quite fast, good matches, corners
+    #detector = cv2.SIFT_create(nfeatures=1000) # quite fast, good matches, blobs
     #detector = cv2.AKAZE_create() # slower, crashed
 
     #detector = cv2.FastFeatureDetector_create()
