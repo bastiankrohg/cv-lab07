@@ -11,6 +11,8 @@ from common_lab_utils import HomographyEstimate, homogeneous, hnormalized, \
 def run_mosaic_lab():
     # Connect to the camera.
     video_source = 0
+    # Windows, avoid buffering
+    # cap = cv2.VideoCapture(video_source, cv2.CAP_DSHOW)
     cap = cv2.VideoCapture(video_source)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
@@ -43,7 +45,12 @@ def run_mosaic_lab():
     # TODO 3: Experiment with feature matching
     # Set up objects for detection, description and matching.
     detector = cv2.ORB_create(nfeatures=1000)
+    #detector = cv2.SIFT_create(nfeatures=1000)
+    #detector = cv2.SimpleBlobDetector_create()
+
     desc_extractor = cv2.ORB_create()
+    #desc_extractor = cv2.SIFT_create()
+    #desc_extractor = cv2.SimpleBlobDetector_create()
     matcher = cv2.BFMatcher_create(desc_extractor.defaultNorm())
 
     # Create homography estimator
@@ -181,9 +188,13 @@ def extract_good_ratio_matches(matches, max_ratio):
         return ()
 
     # TODO 2: Implement the ratio test.
+    matches_array = np.asarray(matches)
+    dist = np.array([m.distance for m in matches_array.ravel()]).reshape(matches_array.shape)
+
+    good_matches = dist[:,0] < dist[:,1] * max_ratio
 
     # Return a tuple of good DMatch objects.
-    return ()   # Dummy, return results!
+    return tuple(matches_array[good_matches,0])
 
 
 class HomographyEstimator:
