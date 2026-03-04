@@ -44,13 +44,34 @@ def run_mosaic_lab():
     # TODO 1: Experiment with blob and corner feature detectors.
     # TODO 3: Experiment with feature matching
     # Set up objects for detection, description and matching.
-    detector = cv2.ORB_create(nfeatures=1000)
-    #detector = cv2.SIFT_create(nfeatures=1000)
+    detector = cv2.ORB_create(nfeatures=1000) # quite fast, good matches
+    #detector = cv2.SIFT_create(nfeatures=1000) # quite fast, good matches
+    #detector = cv2.AKAZE_create() # slower, crashed
+
+    #detector = cv2.FastFeatureDetector_create()
     #detector = cv2.SimpleBlobDetector_create()
+    #detector = cv2.AffineFeature_create()
+
+    # noen må kompileres selv!
+    #detector = cv2.xfeatures2d.AffineFeature2D_create()
+    #detector = cv2.xfeatures2d.FREAK_create()
+    #detector = cv2.xfeatures2d.LATCH_create()
+
 
     desc_extractor = cv2.ORB_create()
     #desc_extractor = cv2.SIFT_create()
+    #desc_extractor = cv2.AKAZE_create()
+
+    #desc_extractor = cv2.FastFeatureDetector_create()
     #desc_extractor = cv2.SimpleBlobDetector_create()
+    #desc_extractor = cv2.AffineFeature_create()
+    
+    # noen må kompileres selv!
+    #desc_extractor = cv2.xfeatures2d.AffineFeature2D_create()
+    #desc_extractor = cv2.xfeatures2d.FREAK_create()
+    #desc_extractor = cv2.xfeatures2d.LATCH_create()
+
+
     matcher = cv2.BFMatcher_create(desc_extractor.defaultNorm())
 
     # Create homography estimator
