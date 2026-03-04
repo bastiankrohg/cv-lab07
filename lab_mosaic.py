@@ -320,12 +320,12 @@ class HomographyEstimator:
 
         # TODO 5: Compute the two-sided reprojection error.
         # Map points onto each other using the homography
-        pt1_in_2 = None     # Dummy, compute!
-        pt2_in_1 = None     # Dummy, compute!
+        pt1_in_2 = hnormalized(H @ homogeneous(pt1))
+        pt2_in_1 = hnormalized(H_inv @ homogeneous(pt2))
 
         # Compute the two-sided reprojection error \epsilon_i.
-        reprojection_error = 2*self._distance_threshold     # Dummy, compute correct error!
-
+        reprojection_error = np.linalg.norm(pt1 - pt2_in_1, axis=0) - np.linalg.norm(pt2 - pt1_in_2, axis=0)
+        #print(reprojection_error)
         return reprojection_error
 
     def _dlt_estimator(self, pts1, pts2):
