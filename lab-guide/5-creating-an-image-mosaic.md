@@ -58,11 +58,17 @@ This is because of interpolations when warping the mask.
 How can we remove these effects with `cv2.erode()`? Try!
 
 
-## Then...
+## Further experiments
 Now you are finished with the lab! 
-But if you still have some time left, or want to continue with this lab at home, there is other cool stuff you can try:
-- Try `cv2.findHomography()` instead of our method.
+But if you still have some time left, or want to continue with this lab at home, here are a few further suggestions:
+- Try `cv2.findHomography()` instead of our method. Are there any differences?
 - Use the estimated homography to search for more, weaker correspondences. Then recompute!
 - Use the keypoint detector you implemented in [lab-corners-py](https://github.com/tek5030/lab-corners-py).
 - Apply blending to the mosaic, like we did in [lab-image-blending-py](https://github.com/tek5030/lab-image-blending-py).
 - Expand the program to make a mosaic of more than two images.
+- [Kornia] and [vismatch] make large collections of modern state-of-the-art matching methods easily available for testing.
+  Test a few of these methods and compare with the ones you used earlier in the lab.
+  Most models can be run on the CPU, but you might want to borrow a CUDA-enabled lab PC for this one!
+
+[Kornia]: https://kornia.readthedocs.io/en/stable/index.html
+[vismatch]: https://github.com/gmberton/vismatch
