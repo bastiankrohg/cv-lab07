@@ -147,19 +147,21 @@ def run_mosaic_lab():
                 duration_estimation = end - start
 
                 # TODO 7: Transform the reference image according to the similarity S, and insert into the mosaic.
-                mosaic = None           # Dummy, compute!
+                mosaic = cv2.warpPerspective(ref_image, S, img_size)
 
                 if estimate is not None:
                     H = estimate.homography
 
                     # TODO 8: Transform the current frame according to S and the computed homography.
-                    frame_warp = None   # Dummy, compute!
+                    frame_warp = cv2.warpPerspective(curr_image, S @ H, img_size)
 
                     # TODO 9: Compute a mask for the transformed image
                     mask = np.ones(np.flip(img_size), dtype=np.uint8)
-                    mask_warp = None    # Dummy, compute!
+                    mask_warp = cv2.warpPerspective(mask, S @ H, img_size)
+                    mask_warp = cv2.erode(mask_warp, np.ones((3, 3)))
 
                     # TODO 10: Insert the current frame into the mosaic
+                    cv2.copyTo(frame_warp, mask_warp, dst=mosaic)
 
                     # Draw estimation duration
                     draw_estimation_details(vis_img, duration_estimation, estimate.num_inliers)
